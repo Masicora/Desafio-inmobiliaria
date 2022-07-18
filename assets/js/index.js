@@ -65,6 +65,12 @@ function templateDepartamento(departamento) {
   </div>`;
 
 }
+function buscar() {
+  const inputCuartos = document.querySelector("#inputCuartos").value;
+  const inputDesdeMetros = document.querySelector("#inputDesdeMetros").value;
+  const inputHastaMetros = document.querySelector("#inputHastaMetros").value;
+}
+
 function cargaInicial(contenedorDePropiedades) {
   let html = "";
   for (const departamento of propiedadesJSON)
@@ -75,6 +81,6 @@ function cargaInicial(contenedorDePropiedades) {
 document.addEventListener('DOMContentLoaded', (event) => {
   const contenedorDePropiedades = document.querySelector(".propiedades");
   const btnBuscar = document.querySelector("#btnBuscar");
-  btnBuscar.addEventListener("click",);
+  btnBuscar.addEventListener("click", buscar);
   cargaInicial(contenedorDePropiedades);
 });
