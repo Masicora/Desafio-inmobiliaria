@@ -79,6 +79,7 @@ function fnBuscar() {
         filtro += template(depto);
       }
       propiedades.innerHTML = filtro;
+      document.querySelector("#conteo").innerHTML = propiedades.childElementCount;
     }
   }
   else {
