@@ -48,7 +48,10 @@ const propiedadesJSON = [
     metros: 500
   }
 ];
-function templateDepartamento(departamento) {
+let propiedades = document.querySelector(".propiedades");
+document.querySelector("#buscar").addEventListener("click", fnBuscar);
+
+function template(departamento) {
   return `<div class="propiedad">
     <div class="img"
       style="background-image: url(${departamento.src})">
@@ -65,22 +68,28 @@ function templateDepartamento(departamento) {
   </div>`;
 
 }
-function buscar() {
-  const inputCuartos = document.querySelector("#inputCuartos").value;
-  const inputDesdeMetros = document.querySelector("#inputDesdeMetros").value;
-  const inputHastaMetros = document.querySelector("#inputHastaMetros").value;
-}
+function fnBuscar() {
+  let cuartos = document.querySelector("#cuartos").value;
+  let minMetros = document.querySelector("#minMetros").value;
+  let maxMetros = document.querySelector("#maxMetros").value;
+  if (cuartos && minMetros && maxMetros) {
+    let filtro = "";
+    for (depto of propiedadesJSON) {
+      if (depto.cuartos >= cuartos && (depto.metros >= minMetros && depto.metros <= maxMetros)) {
+        filtro += template(depto);
+      }
+      propiedades.innerHTML = filtro;
+    }
+  }
+  else {
+    alert("Debe ingresar los cuartos y el rango de metros");
 
-function cargaInicial(contenedorDePropiedades) {
+  }
+}
+function cargaInicial() {
   let html = "";
-  for (const departamento of propiedadesJSON)
-    html += templateDepartamento(departamento);
-  contenedorDePropiedades.innerHTML = html;
+  for (departamento of propiedadesJSON)
+    html += template(departamento);
+  propiedades.innerHTML = html;
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  const contenedorDePropiedades = document.querySelector(".propiedades");
-  const btnBuscar = document.querySelector("#btnBuscar");
-  btnBuscar.addEventListener("click", buscar);
-  cargaInicial(contenedorDePropiedades);
-});
+cargaInicial();
